@@ -1,11 +1,13 @@
 #include "crivo.h"
 
 int main(int argc, char const *argv[]) {
-    inicia_crivo(atoi(argv[1]));
+  inicia_crivo(atoi(argv[1]));
 
-    executa_crivo();
+  executa_crivo();
 
-    // imprime_primos();
+#ifdef LOG
+  imprime_primos();
+#endif
 
-    limpa_crivo();
+  limpa_crivo();
 }

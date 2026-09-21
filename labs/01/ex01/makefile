@@ -1,22 +1,35 @@
+CFLAGS := -O3 $(DEF)
 BIN_DIR := bin
 SRC_DIR := src
+PROGRAMAS := crivo_char crivo_int crivo_bit
+N_TESTE := 10000000
+SAIDA_TIME := resultados_tempo.txt
 
-.PHONY: clean
+EXECS := $(addprefix $(BIN_DIR)/, $(PROGRAMAS))
 
-all: clean bin/crivo_char bin/crivo_int test_time
+.PHONY: clean all test_time $(PROGRAMAS)
+
+all: clean $(EXECS) test_time
+
+$(PROGRAMAS): %: $(BIN_DIR)/%
 
 $(BIN_DIR): 
 	@mkdir -p $(BIN_DIR)
 
-bin/crivo_char: $(BIN_DIR)
-	gcc crivo_char.c main.c -o bin/crivo_char -lm
+$(BIN_DIR)/%: $(SRC_DIR)/%.c $(SRC_DIR)/main.c | $(BIN_DIR)
+	gcc $(CFLAGS) $^ -o $@ -lm
 
-bin/crivo_int: $(BIN_DIR)
-	gcc crivo_int.c main.c -o bin/crivo_int -lm
-
-test_time: bin/crivo_char bin/crivo_int
-	time bin/crivo_char 10000000
-	time bin/crivo_int 10000000 
+test_time: $(EXECS)
+	@echo "Iniciando testes de tempo (Entrada = $(N_TESTE))..."
+	@echo "=== Resultados dos Testes ===" > $(SAIDA_TIME)
+	@echo "Tamanho da entrada: $(N_TESTE)\n" >> $(SAIDA_TIME)
+	@for prog in $(EXECS); do \
+		echo "----------------------------------------" >> $(SAIDA_TIME); \
+		echo "Testando: $$prog" >> $(SAIDA_TIME); \
+		echo "----------------------------------------" >> $(SAIDA_TIME); \
+		{ time $$prog $(N_TESTE); } >> $(SAIDA_TIME) 2>&1; \
+		done
+	@echo "Testes concluídos! Confira o arquivo: $(SAIDA_TIME)"
 
 clean:
-	rm -rf bin
+	rm -rf $(BIN_DIR) $(SAIDA_TIME)
