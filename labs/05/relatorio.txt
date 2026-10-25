@@ -1,0 +1,21 @@
+ms_00_classic
+Tempo de execução do merge sort: 13.08
+----------------------------------------
+ms_01_cutoff
+Tempo de execução do merge sort: 12.06
+----------------------------------------
+ms_02_skip
+Tempo de execução do merge sort: 14.93
+----------------------------------------
+ms_03_cutoff_skip
+Tempo de execução do merge sort: 12.03
+----------------------------------------
+ms_04_bottom
+Tempo de execução do merge sort: 13.55
+----------------------------------------
+ms_05_b_cutoff
+Tempo de execução do merge sort: 12.00
+----------------------------------------
+ms_06_b_skip_cutoff
+Tempo de execução do merge sort: 13.73
+----------------------------------------
