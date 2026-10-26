@@ -4,7 +4,7 @@ TARGETS := $(patsubst src/ms_%.c, ms_%, $(SRCS))
 SIZE ?= 100000000
 TEST ?= unif_rand
 
-CFLAGS := -Wall -Wextra -Iinclude
+CFLAGS := -O3 -Wall -Wextra -Iinclude
 
 .PHONY: all clean test
 
